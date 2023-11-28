@@ -13,7 +13,7 @@ import logging.config
 import json
 
 
-logging.config.fileConfig('logging.conf')
+logging.config.fileConfig(os.path.join(os.getcwd(), 'logging.conf'))
 logger = logging.getLogger('Admin_Client')
 
 class Preprocess:
@@ -311,7 +311,7 @@ class Evaluate:
         seq_3 = self.window(seq=range(32), excluding_list=[], n=3)
         for idx in seq_3:
             win_list = [self.input_list[i] for i in idx]
-            logger.info('test')
+            # logger.info('test')
             # logger.info('%s', (idx, win_list))
 
             if self.three_tils_eval_first(win_list)[0]:
@@ -326,7 +326,7 @@ class Evaluate:
                     next(seq_3)
                     next(seq_3)
                 except StopIteration as e:
-                    logger.error(e)
+                    # logger.error(e)
                     break
                 
             else:
@@ -351,11 +351,11 @@ class Evaluate:
                 try:
                     next(seq_2)
                 except StopIteration as e:
-                    logger.error(e)
+                    # logger.error(e)
                     break
                 
-            else:
-                logger.info(idx, win_list)
+            # else:
+                # logger.info(idx, win_list)
                 # count += 1
         # skip_list = list(chain(*skip_list))
 
@@ -376,7 +376,7 @@ class Evaluate:
                     next(seq_3)
                     next(seq_3)
                 except StopIteration as e:
-                    logger.error(e)
+                    # logger.error(e)
                     break
                 
             else:
