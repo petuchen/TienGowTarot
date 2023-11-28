@@ -11,6 +11,7 @@ from datetime import datetime
 import logging
 import logging.config
 import json
+from pathlib import Path
 
 
 # logging.config.fileConfig(os.path.join(os.getcwd(), 'logging.conf'))
@@ -74,6 +75,7 @@ class Preprocess:
             imshow(image, cmap='Greys_r')
             axis('off')
         output_file = time.strftime("%Y%m%d_%H%M%S.png")
+        Path(os.path.join(os.getcwd(), 'result_img')).mkdir(parents=True, exist_ok=True)
         fig.savefig(os.path.join(os.getcwd(), 'result_img', output_file))
         
         if show_image:
