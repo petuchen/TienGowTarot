@@ -1,26 +1,8 @@
 import streamlit as st
-from streamlit_extras.stateful_button import button
 import random
 from helper import Preprocess, Evaluate
 
 st.runtime.legacy_caching.clear_cache()
-
-def preparing_1(card_cache:list, key:int):
-
-    # print("score: {}".format(score))
-
-    if card_cache:
-        card_list = Preprocess.shuffle(card_cache.copy())
-    else:
-        card_init = Preprocess()
-        card_list = Preprocess.shuffle(card_init.raw_tiles)
-
-    card_cache = card_list.copy()
-    eva = Evaluate(card_list)
-    current_score = eva.processing()
-    score = current_score[0][1]
-
-    return(current_score, card_cache)
 
 
 st.title("牙牌神算")
