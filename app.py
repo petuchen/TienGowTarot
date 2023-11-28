@@ -117,11 +117,12 @@ if len(st.session_state['final_score']) == 3:
         st.text("解曰：{}".format(' '.join(result_dict['description'])))
         st.text("斷曰：{} \n\t{}".format(result_dict['judgement'][0], result_dict['judgement'][1]))
 
-    st.image(os.path.join(os.getcwd(), 'img', 'output', '{}.jpg'.format(final_result[0])))
+    image_path = os.path.join(os.getcwd(), 'img', 'output', '{}.jpg'.format(final_result[0]))
+    st.image(image_path)
     st.download_button(label='下載籤詩',
-                            data= open(os.path.join(os.getcwd(), 'img', 'output', '{}.jpg'.format(final_result[0]), 'rb')).read(),
-                            file_name='{}.jpg'.format(final_result[1]),
-                            mime='image/jpg')
+                        data= open(image_path, 'rb').read(),
+                        file_name='{}.jpg'.format(final_result[1]),
+                        mime='image/jpg')
 
 
 #---------- end result
