@@ -119,7 +119,7 @@ if len(st.session_state['final_score']) == 3:
 
     st.image(os.path.join(os.getcwd(), 'img', 'output', '{}.jpg'.format(final_result[0])))
     st.download_button(label='下載籤詩',
-                            data= open(os.path.join(os.getcwd(), 'img', 'output', '{}.jpg'.format(final_result[0]), 'rb').read(),
+                            data= open(os.path.join(os.getcwd(), 'img', 'output', '{}.jpg'.format(final_result[0]), 'rb')).read(),
                             file_name='{}.jpg'.format(final_result[1]),
                             mime='image/jpg')
 
