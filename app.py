@@ -1,5 +1,6 @@
 import streamlit as st
 import random
+import os
 from helper import Preprocess, Evaluate
 
 st.runtime.legacy_caching.clear_cache()
@@ -116,10 +117,10 @@ if len(st.session_state['final_score']) == 3:
         st.text("解曰：{}".format(' '.join(result_dict['description'])))
         st.text("斷曰：{} \n\t{}".format(result_dict['judgement'][0], result_dict['judgement'][1]))
 
-    st.image('img/output/{}.jpg'.format(final_result[0]))
+    st.image(os.path.join(os.getcwd(), 'img', 'output', '{}.jpg'.format(final_result[0])))
     st.download_button(label='下載籤詩',
-                            data= open('img/output/{}.jpg'.format(final_result[0]), 'rb').read(),
-                            file_name='{}.png'.format(final_result[1]),
+                            data= open(os.path.join(os.getcwd(), 'img', 'output', '{}.jpg'.format(final_result[0]), 'rb').read(),
+                            file_name='{}.jpg'.format(final_result[1]),
                             mime='image/jpg')
 
 

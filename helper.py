@@ -60,7 +60,7 @@ class Preprocess:
         output_list = input_list[new_index:].copy() + input_list[0: new_index].copy()
         return(output_list)
     
-    def show_images(input_list, folder_path='img/', show_image=False, title=''):
+    def show_images(input_list, folder_path, show_image=False, title=''):
         # Plotting the selected tiles
         # Input folder_path: folder path of the tiles images
         # Input input_list: select tiles list
@@ -70,11 +70,11 @@ class Preprocess:
         fig = figure(figsize=(1*number_of_files, 8), dpi=300)
         for i in range(number_of_files):
             a = fig.add_subplot(1, number_of_files, i+1)
-            image = imread(os.path.join(folder_path, name_list[i]+'.svg.png'))
+            image = imread(os.path.join(os.getcwd(), 'img', name_list[i]+'.svg.png'))
             imshow(image, cmap='Greys_r')
             axis('off')
         output_file = time.strftime("%Y%m%d_%H%M%S.png")
-        fig.savefig(os.path.join('result_img', output_file))
+        fig.savefig(os.path.join(os.getcwd(), 'result_img', output_file))
         
         if show_image:
             # with Image.open(os.path.join('result_img', output_file)) as img:
@@ -109,7 +109,7 @@ class Preprocess:
         # input: 6-letter of u,m,d
         # output: dict of description
 
-        des = dict(json.load(open('des.json')))
+        des = dict(json.load(open(os.path.join(os.getcwd(), 'des.json'))))
         if input_string in des.keys():
             return(des[input_string])
         else:
