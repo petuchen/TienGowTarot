@@ -13,8 +13,8 @@ import logging.config
 import json
 
 
-logging.config.fileConfig(os.path.join(os.getcwd(), 'logging.conf'))
-logger = logging.getLogger('Admin_Client')
+# logging.config.fileConfig(os.path.join(os.getcwd(), 'logging.conf'))
+# logger = logging.getLogger('Admin_Client')
 
 class Preprocess:
     # Tils Preprocessing
