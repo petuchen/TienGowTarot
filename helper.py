@@ -102,7 +102,7 @@ class Preprocess:
                 if i[0][1] !=0:
                     final_result = final_result + i[0][0]
                     final_result_zh = final_result_zh + score_result[i[0][0]]
-                    logger.info(score_result[i[0][0]])
+                    # logger.info(score_result[i[0][0]])
                 
         return(final_result, final_result_zh)
         
