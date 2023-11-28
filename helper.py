@@ -61,7 +61,7 @@ class Preprocess:
         output_list = input_list[new_index:].copy() + input_list[0: new_index].copy()
         return(output_list)
     
-    def show_images(input_list, folder_path, show_image=False, title=''):
+    def show_images(input_list, show_image=False, title=''):
         # Plotting the selected tiles
         # Input folder_path: folder path of the tiles images
         # Input input_list: select tiles list
