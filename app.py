@@ -11,15 +11,23 @@ if 'card_cache' not in st.session_state:
     st.session_state['card_cache'] = None
 if 'slider' not in st.session_state:
     st.session_state['slider'] = 1
+if 'disable_opt' not in st.session_state:
+    st.session_state['disable_opt'] = False
 
 def update_value():
     st.session_state['final_score'] = []
     st.session_state['slider'] += 1
+    st.session_state['disable_opt'] = False
 
 
-def slider(value = 1, key=st.session_state['slider'] ):
+def slider(value = 1, key=st.session_state['slider'], disabled=st.session_state['disable_opt']):
     slider_value = st.slider('請移動滑桿來切牌',
-    min_value=1, max_value=32, value=value, step=1, key=key)
+        min_value=1,
+        max_value=32,
+        value=value,
+        step=1,
+        disabled=disabled,
+        key=key)
 
     return(slider_value)
 
@@ -155,7 +163,7 @@ st.subheader("第{}輪，請切牌⋯⋯".format(len(st.session_state['final_sco
 
 int_val = slider()
 
-if int_val > 1:
+if int_val > 1 and st.session_state.disable_opt != True:
 
     with st.spinner("占卜中⋯⋯"):
         # print("score: {}".format(score))
@@ -175,11 +183,13 @@ if int_val > 1:
             st.write("零開，請移動滑桿重新切牌")
         else:
             st.session_state['final_score'].append(current_score)
-            print(len(st.session_state['final_score']))
+            # print(len(st.session_state['final_score']))
             if len(st.session_state['final_score']) <3:
                 st.write("此輪結束，請移動滑桿重新切牌。")
             elif len(st.session_state['final_score'])==3:
                 st.write("占卜結束。")
+                # st.write(len(st.session_state['final_score']))
+                st.session_state.disable_opt = True
 
             with st.expander("數序細節"):
                 st.write(Evaluate.result_translate(current_score))
@@ -203,6 +213,7 @@ if len(st.session_state['final_score']) == 3:
                         file_name='{}.jpg'.format(final_result[1]),
                         mime='image/jpg')
     if st.button("占卜已結束，按下此鍵重新開始。", on_click=update_value):
+        st.session_state.disable_opt = False
         st.rerun()
         # st.rerun()
         # streamlit_js_eval(js_expressions="parent.window.location.reload()")
