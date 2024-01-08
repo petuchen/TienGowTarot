@@ -121,7 +121,7 @@ st.markdown(txt_5)
 
 st.divider()
 
-mbti_types = [
+mbti_types = [ "不提供",
     "ISTJ", "ISFJ", "INFJ", "INTJ",
     "ISTP", "ISFP", "INFP", "INTP",
     "ESTP", "ESFP", "ENFP", "ENTP",
@@ -129,12 +129,12 @@ mbti_types = [
 ]
 
 topic_types = [
-    "事業", "感情", "健康", "財富", "本月運勢"
+    "事業", "感情", "健康", "財富", "本月運勢", "其他"
 ]
 
-gender_input = st.selectbox('性別', ("女", "男", "非二元"), index=None)
-mbti_input = st.selectbox('MBTI 十六型人格', mbti_types, index=None)
-topic_input = st.selectbox('占卜主題', topic_types, index=None)
+gender_input = st.selectbox('性別', ("不提供", "女", "男", "非二元"), index=0, help='不影響占卜結果。')
+mbti_input = st.selectbox('MBTI 十六型人格', mbti_types, index=0, help='不影響占卜結果。')
+topic_input = st.selectbox('占卜主題', topic_types, index=None, help='若選擇其他，請於心中默念想問的主題。')
 
 if gender_input and mbti_input and topic_input:
     st.write('你的身分是：{}的{}人格，想問的是{}。'.format(gender_input, mbti_input, topic_input))
