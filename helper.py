@@ -165,45 +165,45 @@ class Evaluate:
 
         elif set_len == 6:
             score = 6
-            des = '六不同(all six different)'
+            des = '六不同 (all six different)'
             skip = True
 
         elif eval_counter.most_common(1)[0][1] == 5:
             score = 5
-            des = '五子(five the same)'
+            des = '五子 (five the same)'
             skip = True
 
         elif eval_counter.most_common(2)[0][1] == 4 and \
             eval_counter.most_common(2)[0][1] == \
             eval_counter.most_common(2)[1][0] * eval_counter.most_common(2)[1][1] :
             score = 4
-            des = '合巧(four the same and sum the same)'
+            des = '合巧 (four the same and sum the same)'
             skip = True
 
         elif eval_counter.most_common(2)[0][1] == 3 and eval_counter.most_common(2)[1][1] == 3:
             score = 3
-            des = '分相(two times three the same)'
+            des = '分相 (two times three the same)'
             skip = True
 
         elif eval_list in [[1, 1, 2, 2, 3, 3]]:
             score = 3
-            des = '么二三(123)'
+            des = '么二三 (123)'
             skip = True
 
         elif eval_list in [[4, 4, 5, 5, 6, 6]]:
             score = 3
-            des = '馬軍(456)'
+            des = '馬軍 (456)'
             skip = True
 
         elif eval_list in [[1, 1, 2, 2, 3, 3], [4, 4, 5, 5, 6, 6], [2, 2, 3, 3, 6, 6]]:
             score = 3
-            des = '二三六(236)'
+            des = '二三六 (236)'
             skip = True
 
         elif eval_counter.most_common(1)[0][1] == 3 and \
             sum([i*j for i, j in eval_counter.most_common()[1:]]) >=14 :
             score = 1
-            des = '正快(3xn, sum(rest)>=14)'
+            des = '正快 (3xn, sum(rest)>=14)'
             skip = True    
 
         else:
@@ -226,30 +226,7 @@ class Evaluate:
         elif eval_counter.most_common(1)[0][1] == 3 and \
             sum([i*j for i, j in eval_counter.most_common()[1:]]) >=14 :
             score = 1
-            des = '正快 （3xn, sum(rest)>=14）'
-            skip = True    
-
-        else:
-            score = 0
-            des = 'not found'
-            skip = False
-        
-        return(skip, score, des)
-
-
-    def three_tils_eval_second(self, win_list):
-        # print(win_list)
-        eval_list, eval_counter, list_len, set_len = self.set_list_analysis(win_list)
-
-        if list_len != 6:
-            score = 0
-            des = 'false combination'
-            skip = False
-
-        elif eval_counter.most_common(1)[0][1] == 3 and \
-            sum([i*j for i, j in eval_counter.most_common()[1:]]) >=14 :
-            score = 1
-            des = '正快(3xn, sum(rest)>=14)'
+            des = '正快 (3xn, sum(rest)>=14)'
             skip = True    
 
         else:
@@ -270,7 +247,7 @@ class Evaluate:
 
         elif set_len == 1:
             score = 3
-            des = '對子(pair)'
+            des = '對子 (pair)'
             skip = True
 
         else:
@@ -388,3 +365,26 @@ class Evaluate:
         # logger.info('{} {}'.format(len(list(chain(*skip_list))), score))
 
         return(self.scoring(score), len(list(chain(*skip_list))), dict(des_dict))
+
+    def result_translate(input_tuple):
+        ''' Translate the result for human-readable language
+        '''
+        score_result = {
+            "dd": "下下",
+            "md": "中下",
+            "mm": "中平",
+            "um": "上中",
+            "uu": "上上"
+            }
+        scoring, used_card, des_dict =  input_tuple
+        sentence1 = "〈{}〉：".format(score_result[scoring[0]])
+        sentence2 = "總分{}分，其中{}張牌有分。".format(scoring[1], used_card)
+        sentence3 = []
+        for k, v in des_dict.items():
+            sentence3.append("「{}」有{}副".format(k.split(' ')[0], v))
+        sentence3 = '，'.join(sentence3) + '。'
+
+        return(''.join([sentence1, sentence2, sentence3]))
+
+
+
